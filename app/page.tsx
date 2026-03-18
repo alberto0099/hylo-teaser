@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 export default function HomePage() {
-  const progress = 75;
+  const progress = 76;
   const animationDuration = 1800;
 
   const [displayProgress, setDisplayProgress] = useState(0);
@@ -91,7 +91,7 @@ export default function HomePage() {
 
             <div className="progress-card">
               <div className="progress-head">
-                <span>Estado del lanzamiento</span>
+                <span>Sistema despertando...</span>
                 <span className="progress-percent">{displayProgress}%</span>
               </div>
 
