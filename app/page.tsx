@@ -380,7 +380,7 @@ export default function HomePage() {
   }
 
   .teaser-top {
-    margin-top: 6px;
+    margin-top: 20px;
   }
 
   .teaser-tagline {
@@ -389,9 +389,9 @@ export default function HomePage() {
   }
 
   .teaser-bottom {
-    gap: 8px;
+    gap: 11px;
     margin-top: auto;
-    margin-bottom: 14px;
+    margin-bottom: 35px;
     transform: none;
   }
 
