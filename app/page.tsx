@@ -199,25 +199,28 @@ export default function HomePage() {
         }
 
         .teaser-content {
-          position: relative;
-          z-index: 2;
-          min-height: 100dvh;
-          width: 100%;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          align-items: center;
-          padding: 26px 18px 34px;
-          text-align: center;
-        }
+  position: relative;
+  z-index: 2;
+  min-height: 100svh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding:
+    calc(env(safe-area-inset-top, 0px) + 18px)
+    18px
+    calc(env(safe-area-inset-bottom, 0px) + 18px);
+  text-align: center;
+}
 
         .teaser-top {
-          width: 100%;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: flex-start;
-          margin-top: 26px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 10px;
         }
 
         .teaser-tagline {
@@ -230,16 +233,16 @@ export default function HomePage() {
         }
 
         .teaser-bottom {
-          width: 100%;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          gap: 12px;
-          margin-top: auto;
-          margin-bottom: 34px;
-          transform: translateY(22px);
-        }
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: auto;
+  margin-bottom: 18px;
+  transform: translateY(0);
+}
 
         .teaser-badge {
           display: inline-flex;
@@ -368,46 +371,54 @@ export default function HomePage() {
           }
         }
 
-        @media (max-width: 640px) {
-          .teaser-content {
-            padding: 20px 16px 28px;
-          }
+       @media (max-width: 640px) {
+  .teaser-content {
+    padding:
+      calc(env(safe-area-inset-top, 0px) + 16px)
+      16px
+      calc(env(safe-area-inset-bottom, 0px) + 16px);
+  }
 
-          .teaser-top {
-            margin-top: 18px;
-          }
+  .teaser-top {
+    margin-top: 6px;
+  }
 
-          .teaser-tagline {
-            font-size: 18px;
-            max-width: 290px;
-          }
+  .teaser-tagline {
+    font-size: 16px;
+    max-width: 260px;
+  }
 
-          .teaser-bottom {
-            gap: 10px;
-            margin-top: auto;
-            margin-bottom: 46px;
-            transform: translateY(18px);
-          }
+  .teaser-bottom {
+    gap: 8px;
+    margin-top: auto;
+    margin-bottom: 14px;
+    transform: none;
+  }
 
-          .teaser-badge {
-            padding: 9px 14px;
-            font-size: 11px;
-          }
+  .teaser-badge {
+    padding: 8px 14px;
+    font-size: 11px;
+  }
 
-          .progress-card {
-            width: min(94vw, 420px);
-            padding: 16px 14px 14px;
-            border-radius: 22px;
-          }
+  .progress-card {
+    width: min(92vw, 400px);
+    padding: 14px 14px 13px;
+    border-radius: 20px;
+  }
 
-          .progress-head {
-            font-size: 14px;
-          }
+  .progress-head {
+    font-size: 13px;
+    margin-bottom: 10px;
+  }
 
-          .progress-percent {
-            min-width: 46px;
-          }
-        }
+  .progress-percent {
+    min-width: 44px;
+  }
+
+  .progress-track {
+    height: 12px;
+  }
+}
 
         @media (min-width: 641px) and (max-width: 1023px) {
           .teaser-tagline {
