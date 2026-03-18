@@ -8,6 +8,7 @@ export default function HomePage() {
 
   const [displayProgress, setDisplayProgress] = useState(0);
   const [barReady, setBarReady] = useState(false);
+  const [isLandscapeMobile, setIsLandscapeMobile] = useState(false);
 
   useEffect(() => {
     const startDelay = 180;
@@ -37,20 +38,44 @@ export default function HomePage() {
     };
   }, [progress]);
 
+  useEffect(() => {
+    const checkOrientation = () => {
+      const isMobile = window.innerWidth <= 1024;
+      const isLandscape = window.innerWidth > window.innerHeight;
+      setIsLandscapeMobile(isMobile && isLandscape);
+    };
+
+    checkOrientation();
+    window.addEventListener("resize", checkOrientation);
+    window.addEventListener("orientationchange", checkOrientation);
+
+    return () => {
+      window.removeEventListener("resize", checkOrientation);
+      window.removeEventListener("orientationchange", checkOrientation);
+    };
+  }, []);
+
   const particles = Array.from({ length: 18 }, (_, i) => i);
 
   return (
     <>
-      <main className="teaser-page">
+      {isLandscapeMobile && (
+        <div className="rotate-screen">
+          <div className="rotate-phone">📱</div>
+          <div className="rotate-title">Pon tu dispositivo en vertical</div>
+          <div className="rotate-text">
+            Esta experiencia está diseñada para verse en formato vertical.
+          </div>
+        </div>
+      )}
+
+      <main className={`teaser-page ${isLandscapeMobile ? "is-hidden" : ""}`}>
         <div className="teaser-bg" />
         <div className="teaser-overlay" />
 
         <div className="particles-layer" aria-hidden="true">
           {particles.map((i) => (
-            <span
-              key={i}
-              className={`particle particle-${i + 1}`}
-            />
+            <span key={i} className={`particle particle-${i + 1}`} />
           ))}
         </div>
 
@@ -113,6 +138,46 @@ export default function HomePage() {
           font-family: "Raleway", sans-serif;
         }
 
+        .teaser-page.is-hidden {
+          opacity: 0;
+          pointer-events: none;
+        }
+
+        .rotate-screen {
+          position: fixed;
+          inset: 0;
+          z-index: 99999;
+          background: #05050a;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          padding: 24px;
+          text-align: center;
+          color: white;
+          font-family: "Raleway", sans-serif;
+        }
+
+        .rotate-phone {
+          font-size: 42px;
+          margin-bottom: 14px;
+          opacity: 0.95;
+        }
+
+        .rotate-title {
+          font-size: 24px;
+          font-weight: 800;
+          line-height: 1.1;
+          margin-bottom: 10px;
+        }
+
+        .rotate-text {
+          max-width: 320px;
+          font-size: 15px;
+          line-height: 1.45;
+          color: rgba(255, 255, 255, 0.72);
+        }
+
         .teaser-bg {
           position: absolute;
           inset: 0;
@@ -126,15 +191,14 @@ export default function HomePage() {
         .teaser-overlay {
           position: absolute;
           inset: 0;
-          background:
-            linear-gradient(
-              to bottom,
-              rgba(8, 8, 12, 0.16) 0%,
-              rgba(8, 8, 12, 0.08) 24%,
-              rgba(8, 8, 12, 0.12) 58%,
-              rgba(8, 8, 12, 0.38) 80%,
-              rgba(8, 8, 12, 0.66) 100%
-            );
+          background: linear-gradient(
+            to bottom,
+            rgba(8, 8, 12, 0.16) 0%,
+            rgba(8, 8, 12, 0.08) 24%,
+            rgba(8, 8, 12, 0.12) 58%,
+            rgba(8, 8, 12, 0.38) 80%,
+            rgba(8, 8, 12, 0.66) 100%
+          );
         }
 
         .particles-layer {
@@ -158,24 +222,150 @@ export default function HomePage() {
           will-change: transform, opacity;
         }
 
-        .particle-1  { width: 4px; height: 4px; left: 8%;  top: 72%; animation-duration: 8s;  animation-delay: 0.2s; }
-        .particle-2  { width: 5px; height: 5px; left: 18%; top: 58%; animation-duration: 9s;  animation-delay: 1.1s; }
-        .particle-3  { width: 3px; height: 3px; left: 26%; top: 82%; animation-duration: 7.2s; animation-delay: 0.7s; }
-        .particle-4  { width: 6px; height: 6px; left: 34%; top: 46%; animation-duration: 10s; animation-delay: 1.8s; }
-        .particle-5  { width: 4px; height: 4px; left: 42%; top: 66%; animation-duration: 8.6s; animation-delay: 0.4s; }
-        .particle-6  { width: 3px; height: 3px; left: 48%; top: 30%; animation-duration: 7.8s; animation-delay: 1.4s; }
-        .particle-7  { width: 5px; height: 5px; left: 56%; top: 74%; animation-duration: 9.4s; animation-delay: 0.9s; }
-        .particle-8  { width: 4px; height: 4px; left: 63%; top: 52%; animation-duration: 8.2s; animation-delay: 2s; }
-        .particle-9  { width: 3px; height: 3px; left: 71%; top: 64%; animation-duration: 7.4s; animation-delay: 0.5s; }
-        .particle-10 { width: 6px; height: 6px; left: 78%; top: 42%; animation-duration: 10.2s; animation-delay: 1.6s; }
-        .particle-11 { width: 4px; height: 4px; left: 84%; top: 80%; animation-duration: 8.8s; animation-delay: 1s; }
-        .particle-12 { width: 3px; height: 3px; left: 90%; top: 56%; animation-duration: 7.6s; animation-delay: 0.3s; }
-        .particle-13 { width: 5px; height: 5px; left: 12%; top: 24%; animation-duration: 9.2s; animation-delay: 2.2s; }
-        .particle-14 { width: 3px; height: 3px; left: 22%; top: 36%; animation-duration: 7.3s; animation-delay: 0.6s; }
-        .particle-15 { width: 4px; height: 4px; left: 59%; top: 20%; animation-duration: 8.4s; animation-delay: 1.3s; }
-        .particle-16 { width: 3px; height: 3px; left: 68%; top: 28%; animation-duration: 7.9s; animation-delay: 1.9s; }
-        .particle-17 { width: 5px; height: 5px; left: 80%; top: 18%; animation-duration: 9.6s; animation-delay: 0.8s; }
-        .particle-18 { width: 4px; height: 4px; left: 38%; top: 16%; animation-duration: 8.1s; animation-delay: 1.5s; }
+        .particle-1 {
+          width: 4px;
+          height: 4px;
+          left: 8%;
+          top: 72%;
+          animation-duration: 8s;
+          animation-delay: 0.2s;
+        }
+        .particle-2 {
+          width: 5px;
+          height: 5px;
+          left: 18%;
+          top: 58%;
+          animation-duration: 9s;
+          animation-delay: 1.1s;
+        }
+        .particle-3 {
+          width: 3px;
+          height: 3px;
+          left: 26%;
+          top: 82%;
+          animation-duration: 7.2s;
+          animation-delay: 0.7s;
+        }
+        .particle-4 {
+          width: 6px;
+          height: 6px;
+          left: 34%;
+          top: 46%;
+          animation-duration: 10s;
+          animation-delay: 1.8s;
+        }
+        .particle-5 {
+          width: 4px;
+          height: 4px;
+          left: 42%;
+          top: 66%;
+          animation-duration: 8.6s;
+          animation-delay: 0.4s;
+        }
+        .particle-6 {
+          width: 3px;
+          height: 3px;
+          left: 48%;
+          top: 30%;
+          animation-duration: 7.8s;
+          animation-delay: 1.4s;
+        }
+        .particle-7 {
+          width: 5px;
+          height: 5px;
+          left: 56%;
+          top: 74%;
+          animation-duration: 9.4s;
+          animation-delay: 0.9s;
+        }
+        .particle-8 {
+          width: 4px;
+          height: 4px;
+          left: 63%;
+          top: 52%;
+          animation-duration: 8.2s;
+          animation-delay: 2s;
+        }
+        .particle-9 {
+          width: 3px;
+          height: 3px;
+          left: 71%;
+          top: 64%;
+          animation-duration: 7.4s;
+          animation-delay: 0.5s;
+        }
+        .particle-10 {
+          width: 6px;
+          height: 6px;
+          left: 78%;
+          top: 42%;
+          animation-duration: 10.2s;
+          animation-delay: 1.6s;
+        }
+        .particle-11 {
+          width: 4px;
+          height: 4px;
+          left: 84%;
+          top: 80%;
+          animation-duration: 8.8s;
+          animation-delay: 1s;
+        }
+        .particle-12 {
+          width: 3px;
+          height: 3px;
+          left: 90%;
+          top: 56%;
+          animation-duration: 7.6s;
+          animation-delay: 0.3s;
+        }
+        .particle-13 {
+          width: 5px;
+          height: 5px;
+          left: 12%;
+          top: 24%;
+          animation-duration: 9.2s;
+          animation-delay: 2.2s;
+        }
+        .particle-14 {
+          width: 3px;
+          height: 3px;
+          left: 22%;
+          top: 36%;
+          animation-duration: 7.3s;
+          animation-delay: 0.6s;
+        }
+        .particle-15 {
+          width: 4px;
+          height: 4px;
+          left: 59%;
+          top: 20%;
+          animation-duration: 8.4s;
+          animation-delay: 1.3s;
+        }
+        .particle-16 {
+          width: 3px;
+          height: 3px;
+          left: 68%;
+          top: 28%;
+          animation-duration: 7.9s;
+          animation-delay: 1.9s;
+        }
+        .particle-17 {
+          width: 5px;
+          height: 5px;
+          left: 80%;
+          top: 18%;
+          animation-duration: 9.6s;
+          animation-delay: 0.8s;
+        }
+        .particle-18 {
+          width: 4px;
+          height: 4px;
+          left: 38%;
+          top: 16%;
+          animation-duration: 8.1s;
+          animation-delay: 1.5s;
+        }
 
         @keyframes floatParticle {
           0% {
@@ -199,28 +389,26 @@ export default function HomePage() {
         }
 
         .teaser-content {
-  position: relative;
-  z-index: 2;
-  min-height: 100svh;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  padding:
-    calc(env(safe-area-inset-top, 0px) + 18px)
-    18px
-    calc(env(safe-area-inset-bottom, 0px) + 18px);
-  text-align: center;
-}
+          position: relative;
+          z-index: 2;
+          min-height: 100svh;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: center;
+          padding: calc(env(safe-area-inset-top, 0px) + 18px) 18px
+            calc(env(safe-area-inset-bottom, 0px) + 18px);
+          text-align: center;
+        }
 
         .teaser-top {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  margin-top: 10px;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-start;
+          margin-top: 10px;
         }
 
         .teaser-tagline {
@@ -233,16 +421,16 @@ export default function HomePage() {
         }
 
         .teaser-bottom {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-top: auto;
-  margin-bottom: 18px;
-  transform: translateY(0);
-}
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          margin-top: auto;
+          margin-bottom: 18px;
+          transform: translateY(0);
+        }
 
         .teaser-badge {
           display: inline-flex;
@@ -254,16 +442,13 @@ export default function HomePage() {
           background: rgba(10, 10, 16, 0.42);
           backdrop-filter: blur(12px);
           -webkit-backdrop-filter: blur(12px);
-          box-shadow:
-            0 12px 32px rgba(0, 0, 0, 0.22),
+          box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22),
             inset 0 1px 0 rgba(255, 255, 255, 0.05);
           font-size: clamp(11px, 1.2vw, 13px);
           font-weight: 800;
           letter-spacing: 0.18em;
           color: rgba(255, 255, 255, 0.92);
-          transition:
-            transform 180ms ease,
-            border-color 180ms ease,
+          transition: transform 180ms ease, border-color 180ms ease,
             background 180ms ease;
           cursor: default;
         }
@@ -282,12 +467,9 @@ export default function HomePage() {
           background: rgba(12, 12, 18, 0.5);
           backdrop-filter: blur(16px);
           -webkit-backdrop-filter: blur(16px);
-          box-shadow:
-            0 18px 40px rgba(0, 0, 0, 0.28),
+          box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28),
             inset 0 1px 0 rgba(255, 255, 255, 0.05);
-          transition:
-            transform 180ms ease,
-            border-color 180ms ease,
+          transition: transform 180ms ease, border-color 180ms ease,
             background 180ms ease;
         }
 
@@ -336,8 +518,7 @@ export default function HomePage() {
             #f7c4ee 50%,
             #ffd7f5 100%
           );
-          box-shadow:
-            0 0 12px rgba(244, 178, 230, 0.18),
+          box-shadow: 0 0 12px rgba(244, 178, 230, 0.18),
             0 0 20px rgba(244, 178, 230, 0.1);
           overflow: hidden;
           transition: width var(--fill-duration) cubic-bezier(0.22, 1, 0.36, 1);
@@ -371,54 +552,52 @@ export default function HomePage() {
           }
         }
 
-       @media (max-width: 640px) {
-  .teaser-content {
-    padding:
-      calc(env(safe-area-inset-top, 0px) + 16px)
-      16px
-      calc(env(safe-area-inset-bottom, 0px) + 16px);
-  }
+        @media (max-width: 640px) {
+          .teaser-content {
+            padding: calc(env(safe-area-inset-top, 0px) + 16px) 16px
+              calc(env(safe-area-inset-bottom, 0px) + 16px);
+          }
 
-  .teaser-top {
-    margin-top: 20px;
-  }
+          .teaser-top {
+            margin-top: 20px;
+          }
 
-  .teaser-tagline {
-    font-size: 16px;
-    max-width: 260px;
-  }
+          .teaser-tagline {
+            font-size: 16px;
+            max-width: 260px;
+          }
 
-  .teaser-bottom {
-    gap: 11px;
-    margin-top: auto;
-    margin-bottom: 35px;
-    transform: none;
-  }
+          .teaser-bottom {
+            gap: 11px;
+            margin-top: auto;
+            margin-bottom: 35px;
+            transform: none;
+          }
 
-  .teaser-badge {
-    padding: 8px 14px;
-    font-size: 11px;
-  }
+          .teaser-badge {
+            padding: 8px 14px;
+            font-size: 11px;
+          }
 
-  .progress-card {
-    width: min(92vw, 400px);
-    padding: 14px 14px 13px;
-    border-radius: 20px;
-  }
+          .progress-card {
+            width: min(92vw, 400px);
+            padding: 14px 14px 13px;
+            border-radius: 20px;
+          }
 
-  .progress-head {
-    font-size: 13px;
-    margin-bottom: 10px;
-  }
+          .progress-head {
+            font-size: 13px;
+            margin-bottom: 10px;
+          }
 
-  .progress-percent {
-    min-width: 44px;
-  }
+          .progress-percent {
+            min-width: 44px;
+          }
 
-  .progress-track {
-    height: 12px;
-  }
-}
+          .progress-track {
+            height: 12px;
+          }
+        }
 
         @media (min-width: 641px) and (max-width: 1023px) {
           .teaser-tagline {
@@ -462,4 +641,3 @@ export default function HomePage() {
     </>
   );
 }
-
