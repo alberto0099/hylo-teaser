@@ -81,7 +81,7 @@ export default function HomePage() {
 
         <section className="teaser-content">
           <div className="teaser-top">
-            <p className="teaser-tagline">Your campus, your secrets</p>
+            <p className="teaser-tagline">Your campus, your secrets.</p>
           </div>
 
           <div className="teaser-bottom">
@@ -91,7 +91,11 @@ export default function HomePage() {
 
             <div className="progress-card">
               <div className="progress-head">
-                <span>Sistema despertando...</span>
+                <span className="progress-status-wrap">
+                  <span className="progress-status-dot" />
+                  <span className="progress-status-text">Sistema despertando...</span>
+                </span>
+
                 <span className="progress-percent">{displayProgress}%</span>
               </div>
 
@@ -106,6 +110,7 @@ export default function HomePage() {
                   }
                 >
                   <span className="progress-shine" />
+                  <span className="progress-glow-tail" />
                 </div>
               </div>
             </div>
@@ -113,7 +118,7 @@ export default function HomePage() {
         </section>
       </main>
 
-      <style jsx global>{`
+      <style>{`
         @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800;900&display=swap");
 
         html,
@@ -486,13 +491,47 @@ export default function HomePage() {
           gap: 12px;
           margin-bottom: 12px;
           font-size: clamp(14px, 1.25vw, 16px);
-          font-weight: 800;
+          font-weight: 600;
           color: rgba(255, 255, 255, 0.94);
         }
 
+        .progress-status-wrap {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          min-width: 0;
+        }
+
+        .progress-status-dot {
+          width: 9px;
+          height: 9px;
+          border-radius: 999px;
+          flex-shrink: 0;
+          background: #f4b2e6;
+          box-shadow:
+            0 0 0 0 rgba(244, 178, 230, 0.45),
+            0 0 12px rgba(244, 178, 230, 0.55),
+            0 0 22px rgba(244, 178, 230, 0.2);
+          animation: statusPulse 1.8s ease-in-out infinite;
+        }
+
+        .progress-status-text {
+          position: relative;
+          display: inline-block;
+          color: rgba(255, 255, 255, 0.96);
+          letter-spacing: 0.01em;
+          text-shadow:
+            0 0 12px rgba(244, 178, 230, 0.08),
+            0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+
+    
+
         .progress-percent {
           color: #f4b2e6;
-          text-shadow: 0 0 14px rgba(244, 178, 230, 0.22);
+          text-shadow:
+            0 0 14px rgba(244, 178, 230, 0.22),
+            0 0 24px rgba(244, 178, 230, 0.12);
           min-width: 52px;
           text-align: right;
           font-variant-numeric: tabular-nums;
@@ -502,9 +541,31 @@ export default function HomePage() {
           width: 100%;
           height: 14px;
           border-radius: 999px;
-          background: rgba(255, 255, 255, 0.12);
+          background:
+            linear-gradient(
+              180deg,
+              rgba(255, 255, 255, 0.11) 0%,
+              rgba(255, 255, 255, 0.08) 100%
+            );
           overflow: hidden;
-          box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.35);
+          box-shadow:
+            inset 0 1px 3px rgba(0, 0, 0, 0.35),
+            inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+          position: relative;
+        }
+
+        .progress-track::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.03) 0%,
+            rgba(255, 255, 255, 0.08) 50%,
+            rgba(255, 255, 255, 0.03) 100%
+          );
+          opacity: 0.7;
+          pointer-events: none;
         }
 
         .progress-fill {
@@ -518,8 +579,10 @@ export default function HomePage() {
             #f7c4ee 50%,
             #ffd7f5 100%
           );
-          box-shadow: 0 0 12px rgba(244, 178, 230, 0.18),
-            0 0 20px rgba(244, 178, 230, 0.1);
+          box-shadow:
+            0 0 12px rgba(244, 178, 230, 0.18),
+            0 0 20px rgba(244, 178, 230, 0.1),
+            0 0 36px rgba(244, 178, 230, 0.08);
           overflow: hidden;
           transition: width var(--fill-duration) cubic-bezier(0.22, 1, 0.36, 1);
         }
@@ -543,12 +606,61 @@ export default function HomePage() {
           animation: hyloShine 2.8s linear infinite;
         }
 
+        .progress-glow-tail {
+          position: absolute;
+          top: 50%;
+          right: -8px;
+          width: 30px;
+          height: 30px;
+          transform: translateY(-50%);
+          border-radius: 999px;
+          background: radial-gradient(
+            circle,
+            rgba(255, 255, 255, 0.45) 0%,
+            rgba(244, 178, 230, 0.26) 40%,
+            transparent 72%
+          );
+          filter: blur(4px);
+          pointer-events: none;
+          animation: glowTailPulse 2s ease-in-out infinite;
+        }
+
         @keyframes hyloShine {
           0% {
             transform: translateX(-120%);
           }
           100% {
             transform: translateX(140%);
+          }
+        }
+
+        @keyframes statusPulse {
+          0%, 100% {
+            transform: scale(1);
+            box-shadow:
+              0 0 0 0 rgba(244, 178, 230, 0.45),
+              0 0 12px rgba(244, 178, 230, 0.55),
+              0 0 22px rgba(244, 178, 230, 0.2);
+          }
+          50% {
+            transform: scale(1.08);
+            box-shadow:
+              0 0 0 6px rgba(244, 178, 230, 0),
+              0 0 16px rgba(244, 178, 230, 0.78),
+              0 0 28px rgba(244, 178, 230, 0.24);
+          }
+        }
+
+    
+
+        @keyframes glowTailPulse {
+          0%, 100% {
+            opacity: 0.7;
+            transform: translateY(-50%) scale(0.96);
+          }
+          50% {
+            opacity: 1;
+            transform: translateY(-50%) scale(1.08);
           }
         }
 
@@ -596,6 +708,15 @@ export default function HomePage() {
 
           .progress-track {
             height: 12px;
+          }
+
+          .progress-status-wrap {
+            gap: 8px;
+          }
+
+          .progress-status-dot {
+            width: 8px;
+            height: 8px;
           }
         }
 
