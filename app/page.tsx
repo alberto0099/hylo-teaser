@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 export default function HomePage() {
-  const progress = 76;
+  const progress = 83;
   const animationDuration = 1800;
 
   const [displayProgress, setDisplayProgress] = useState(0);
@@ -55,7 +55,7 @@ export default function HomePage() {
     };
   }, []);
 
-  const particles = Array.from({ length: 18 }, (_, i) => i);
+  const particles = Array.from({ length: 42 }, (_, i) => i);
 
   return (
     <>
@@ -93,7 +93,9 @@ export default function HomePage() {
               <div className="progress-head">
                 <span className="progress-status-wrap">
                   <span className="progress-status-dot" />
-                  <span className="progress-status-text">Sistema despertando...</span>
+                  <span className="progress-status-text">
+                    Sistema despertando...
+                  </span>
                 </span>
 
                 <span className="progress-percent">{displayProgress}%</span>
@@ -217,6 +219,8 @@ export default function HomePage() {
         .particle {
           position: absolute;
           display: block;
+          width: 4px;
+          height: 4px;
           border-radius: 999px;
           background: rgba(244, 178, 230, 0.7);
           box-shadow: 0 0 10px rgba(244, 178, 230, 0.18);
@@ -227,150 +231,48 @@ export default function HomePage() {
           will-change: transform, opacity;
         }
 
-        .particle-1 {
-          width: 4px;
-          height: 4px;
-          left: 8%;
-          top: 72%;
-          animation-duration: 8s;
-          animation-delay: 0.2s;
-        }
-        .particle-2 {
-          width: 5px;
-          height: 5px;
-          left: 18%;
-          top: 58%;
-          animation-duration: 9s;
-          animation-delay: 1.1s;
-        }
-        .particle-3 {
-          width: 3px;
-          height: 3px;
-          left: 26%;
-          top: 82%;
-          animation-duration: 7.2s;
-          animation-delay: 0.7s;
-        }
-        .particle-4 {
-          width: 6px;
-          height: 6px;
-          left: 34%;
-          top: 46%;
-          animation-duration: 10s;
-          animation-delay: 1.8s;
-        }
-        .particle-5 {
-          width: 4px;
-          height: 4px;
-          left: 42%;
-          top: 66%;
-          animation-duration: 8.6s;
-          animation-delay: 0.4s;
-        }
-        .particle-6 {
-          width: 3px;
-          height: 3px;
-          left: 48%;
-          top: 30%;
-          animation-duration: 7.8s;
-          animation-delay: 1.4s;
-        }
-        .particle-7 {
-          width: 5px;
-          height: 5px;
-          left: 56%;
-          top: 74%;
-          animation-duration: 9.4s;
-          animation-delay: 0.9s;
-        }
-        .particle-8 {
-          width: 4px;
-          height: 4px;
-          left: 63%;
-          top: 52%;
-          animation-duration: 8.2s;
-          animation-delay: 2s;
-        }
-        .particle-9 {
-          width: 3px;
-          height: 3px;
-          left: 71%;
-          top: 64%;
-          animation-duration: 7.4s;
-          animation-delay: 0.5s;
-        }
-        .particle-10 {
-          width: 6px;
-          height: 6px;
-          left: 78%;
-          top: 42%;
-          animation-duration: 10.2s;
-          animation-delay: 1.6s;
-        }
-        .particle-11 {
-          width: 4px;
-          height: 4px;
-          left: 84%;
-          top: 80%;
-          animation-duration: 8.8s;
-          animation-delay: 1s;
-        }
-        .particle-12 {
-          width: 3px;
-          height: 3px;
-          left: 90%;
-          top: 56%;
-          animation-duration: 7.6s;
-          animation-delay: 0.3s;
-        }
-        .particle-13 {
-          width: 5px;
-          height: 5px;
-          left: 12%;
-          top: 24%;
-          animation-duration: 9.2s;
-          animation-delay: 2.2s;
-        }
-        .particle-14 {
-          width: 3px;
-          height: 3px;
-          left: 22%;
-          top: 36%;
-          animation-duration: 7.3s;
-          animation-delay: 0.6s;
-        }
-        .particle-15 {
-          width: 4px;
-          height: 4px;
-          left: 59%;
-          top: 20%;
-          animation-duration: 8.4s;
-          animation-delay: 1.3s;
-        }
-        .particle-16 {
-          width: 3px;
-          height: 3px;
-          left: 68%;
-          top: 28%;
-          animation-duration: 7.9s;
-          animation-delay: 1.9s;
-        }
-        .particle-17 {
-          width: 5px;
-          height: 5px;
-          left: 80%;
-          top: 18%;
-          animation-duration: 9.6s;
-          animation-delay: 0.8s;
-        }
-        .particle-18 {
-          width: 4px;
-          height: 4px;
-          left: 38%;
-          top: 16%;
-          animation-duration: 8.1s;
-          animation-delay: 1.5s;
-        }
+        .particle-1 { left: 6%; top: 76%; animation-duration: 8s; animation-delay: 0.2s; }
+        .particle-2 { left: 12%; top: 62%; animation-duration: 9s; animation-delay: 1.1s; }
+        .particle-3 { left: 18%; top: 84%; animation-duration: 7.2s; animation-delay: 0.7s; }
+        .particle-4 { left: 24%; top: 46%; animation-duration: 10s; animation-delay: 1.8s; }
+        .particle-5 { left: 30%; top: 66%; animation-duration: 8.6s; animation-delay: 0.4s; }
+        .particle-6 { left: 36%; top: 30%; animation-duration: 7.8s; animation-delay: 1.4s; }
+        .particle-7 { left: 42%; top: 74%; animation-duration: 9.4s; animation-delay: 0.9s; }
+        .particle-8 { left: 48%; top: 52%; animation-duration: 8.2s; animation-delay: 2s; }
+        .particle-9 { left: 54%; top: 64%; animation-duration: 7.4s; animation-delay: 0.5s; }
+        .particle-10 { left: 60%; top: 42%; animation-duration: 10.2s; animation-delay: 1.6s; }
+        .particle-11 { left: 66%; top: 80%; animation-duration: 8.8s; animation-delay: 1s; }
+        .particle-12 { left: 72%; top: 56%; animation-duration: 7.6s; animation-delay: 0.3s; }
+        .particle-13 { left: 78%; top: 24%; animation-duration: 9.2s; animation-delay: 2.2s; }
+        .particle-14 { left: 84%; top: 36%; animation-duration: 7.3s; animation-delay: 0.6s; }
+        .particle-15 { left: 90%; top: 20%; animation-duration: 8.4s; animation-delay: 1.3s; }
+        .particle-16 { left: 14%; top: 18%; animation-duration: 7.9s; animation-delay: 1.9s; }
+        .particle-17 { left: 22%; top: 12%; animation-duration: 9.6s; animation-delay: 0.8s; }
+        .particle-18 { left: 38%; top: 16%; animation-duration: 8.1s; animation-delay: 1.5s; }
+        .particle-19 { left: 10%; top: 70%; animation-duration: 8.7s; animation-delay: 0.9s; }
+        .particle-20 { left: 16%; top: 50%; animation-duration: 9.1s; animation-delay: 1.7s; }
+        .particle-21 { left: 28%; top: 78%; animation-duration: 7.7s; animation-delay: 0.4s; }
+        .particle-22 { left: 32%; top: 40%; animation-duration: 9.8s; animation-delay: 2.1s; }
+        .particle-23 { left: 40%; top: 60%; animation-duration: 8.3s; animation-delay: 1.2s; }
+        .particle-24 { left: 46%; top: 26%; animation-duration: 7.5s; animation-delay: 0.6s; }
+        .particle-25 { left: 52%; top: 82%; animation-duration: 9.3s; animation-delay: 1.8s; }
+        .particle-26 { left: 58%; top: 58%; animation-duration: 8.1s; animation-delay: 0.3s; }
+        .particle-27 { left: 64%; top: 34%; animation-duration: 7.9s; animation-delay: 1.4s; }
+        .particle-28 { left: 70%; top: 72%; animation-duration: 9.7s; animation-delay: 0.5s; }
+        .particle-29 { left: 76%; top: 48%; animation-duration: 8.5s; animation-delay: 2s; }
+        .particle-30 { left: 82%; top: 68%; animation-duration: 7.6s; animation-delay: 1s; }
+        .particle-31 { left: 88%; top: 44%; animation-duration: 9.4s; animation-delay: 1.6s; }
+        .particle-32 { left: 94%; top: 62%; animation-duration: 8.2s; animation-delay: 0.7s; }
+        .particle-33 { left: 8%; top: 28%; animation-duration: 9.1s; animation-delay: 1.1s; }
+        .particle-34 { left: 20%; top: 32%; animation-duration: 7.8s; animation-delay: 2.2s; }
+        .particle-35 { left: 26%; top: 22%; animation-duration: 8.9s; animation-delay: 0.8s; }
+        .particle-36 { left: 44%; top: 14%; animation-duration: 7.4s; animation-delay: 1.9s; }
+        .particle-37 { left: 50%; top: 18%; animation-duration: 9.2s; animation-delay: 1.5s; }
+        .particle-38 { left: 62%; top: 12%; animation-duration: 8.3s; animation-delay: 0.4s; }
+        .particle-39 { left: 68%; top: 22%; animation-duration: 9.6s; animation-delay: 2s; }
+        .particle-40 { left: 74%; top: 14%; animation-duration: 7.7s; animation-delay: 0.9s; }
+        .particle-41 { left: 86%; top: 26%; animation-duration: 8.8s; animation-delay: 1.3s; }
+        .particle-42 { left: 96%; top: 18%; animation-duration: 7.9s; animation-delay: 0.5s; }
 
         @keyframes floatParticle {
           0% {
@@ -525,8 +427,6 @@ export default function HomePage() {
             0 1px 0 rgba(255, 255, 255, 0.05);
         }
 
-    
-
         .progress-percent {
           color: #f4b2e6;
           text-shadow:
@@ -650,8 +550,6 @@ export default function HomePage() {
               0 0 28px rgba(244, 178, 230, 0.24);
           }
         }
-
-    
 
         @keyframes glowTailPulse {
           0%, 100% {
