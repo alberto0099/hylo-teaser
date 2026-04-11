@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 export default function HomePage() {
-  const progress = 83;
+  const progress = 87;
   const animationDuration = 1800;
 
   const [displayProgress, setDisplayProgress] = useState(0);
